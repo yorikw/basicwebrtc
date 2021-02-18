@@ -1194,7 +1194,7 @@ function shimGetUserMedia(window) {
       });
     });
   };
-  navigator.getUserMedia = getUserMedia_.bind(navigator);
+  navigator.mediaDevices.getUserMedia = getUserMedia_.bind(navigator);
 
   // Even though Chrome 45 has navigator.mediaDevices and a getUserMedia
   // function which returns a Promise, it does not accept spec-style
