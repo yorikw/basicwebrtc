@@ -5,11 +5,8 @@
 //------------------------------
 
 //Define https & websocket Port
-const HTTP_PORT = parseInt(process.env.listen_port) > 0 ? parseInt(process.env.listen_port) : 8080;
+const HTTP_PORT = parseInt(process.env.listen_port) > 0 ? parseInt(process.env.listen_port) : 3001;
 const HTTP_IP = process.env.listen_ip ? process.env.listen_ip : "0.0.0.0";
-
-const HTTPS_PORT = parseInt(process.env.listen_port) > 0 ? parseInt(process.env.listen_port) : 4343;
-const HTTPS_IP = process.env.listen_ip ? process.env.listen_ip : "0.0.0.0";
 
 //Define API Version
 const API_VERSION = 1.1;
@@ -41,13 +38,11 @@ var ioServer = require('socket.io')(app, {cors: {
 var crypto = require('crypto');
 
 app.listen(HTTP_PORT, HTTP_IP);
-app.listen(HTTPS_PORT, HTTPS_IP);
 
 var icesevers = JSON.parse(fs.readFileSync("./iceservers.json", 'utf8'));
 
 console.log("--------------------------------------------");
 console.log("SIGNALINGSERVER RUNNING ON IP:PORT: " + HTTP_IP + ':' + HTTP_PORT);
-console.log("SIGNALINGSERVER RUNNING ON IP:PORT: " + HTTPS_IP + ':' + HTTPS_PORT);
 console.log("--------------------------------------------");
 
 var registerdUUIDs = {};

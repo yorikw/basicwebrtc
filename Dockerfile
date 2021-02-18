@@ -1,7 +1,5 @@
 FROM node:11
 
-MAINTAINER yorikw
-
 # Create app directory
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
@@ -13,6 +11,5 @@ RUN npm install
 # Bundle app source
 COPY . /opt/app
 
-EXPOSE 4343
-EXPOSE 8080
+EXPOSE 3001
 CMD [ "npm", "start" ]

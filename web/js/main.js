@@ -108,7 +108,7 @@ socket.on("connect", function () {
     })
 
     if (camOnAtStart) {
-      navigator.mediaDevices.getUserMedia({
+      navigator.getUserMedia({
         video: true,
         audio: true
       }, function (stream) { //OnSuccess
@@ -122,7 +122,7 @@ socket.on("connect", function () {
     }
 
     function startUserMedia() {
-      navigator.mediaDevices.getUserMedia({
+      navigator.getUserMedia({
         video: false, // { 'facingMode': "user" }
         audio: { 'echoCancellation': true, 'noiseSuppression': true }
       }, function (stream) { //OnSuccess
@@ -288,7 +288,7 @@ $(document).ready(function () {
 
     if (!camActive) {
       $("#addRemoveCameraBtn").css({ color: "#030356" });
-      navigator.mediaDevices.getUserMedia({
+      navigator.getUserMedia({
         video: { 'facingMode': "user" },
         audio: false
       }, function (stream) { //OnSuccess
