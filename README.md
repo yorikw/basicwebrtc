@@ -1,6 +1,6 @@
 # basicWebRTC
 
-Setup your own WebRTC Server with 1on1 and group calls! All Calls are encrypted P2P!
+Setup your own WebRTC Server with 1on1 and group calls! All Calls are P2P encrypted!
 
 ## Functions
 * Audio
