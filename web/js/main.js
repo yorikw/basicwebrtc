@@ -15,7 +15,7 @@ var roomname = getUrlParam("roomname", false);
 
 if (!roomname) {
   roomname = "r" + Math.random().toString().replace(".", "")
-  window.location = location.href + "#roomname=" + roomname
+  window.location = location.href + "?roomname=" + roomname
 }
 
 if (base64Domain && socketDomain) {
@@ -28,7 +28,7 @@ if (isMobile) { //No Screenshare on mobile devices
   $("#mediaControll").css({ width: "270px" })
 }
 
-const SocketIO_Options = {withCredentials: false}
+const SocketIO_Options = { withCredentials: false }
 
 var socket;
 if (socketDomain) {
@@ -72,10 +72,10 @@ socket.on("connect", function () {
       return console.log(err)
     }
 
-    if(alreadyRegistered) {
+    if (alreadyRegistered) {
       return console.log("We are alreadyregistered so don't do it again!")
     }
-    
+
     socket.on("API_VERSION", function (serverAPI_VERSION) {
       if (API_VERSION != serverAPI_VERSION) {
         alert("SERVER has a different API Version (Client: v" + API_VERSION + " Server: v" + serverAPI_VERSION + ")! This can cause problems, so be warned!")
@@ -402,11 +402,15 @@ function updateUserLayout() {
     streamCnt++;
 
     var uDisplay = userStream["username"] && userStream["username"] != "NA" ? userStream["username"].substr(0, 2).toUpperCase() : i.substr(0, 2).toUpperCase();
-    var userDiv = $('<div class="videoplaceholder" style="position:relative;" id="' + i + '">' +
-      '<div class="userPlaceholderContainer" style="width:100%; height:100%; position:absolute; overflow:hidden; background: #474747;">' +
-      '<div class="userPlaceholder">' + uDisplay + '</div>' +
-      '</div>' +
-      '</div>')
+    var userDiv = $('<div class="videoplaceholder" style="position:relative;" id="' + i + '"></div>');
+
+    //only add chat data to the first stream
+    if (streamCnt === 1) {
+      userDiv.append($('<div class="userPlaceholderContainer">' +
+        '<div class="qrcodePlaceholder">' + $('<div/>').qrcode($(location).attr('href')).html() + '</div>' +
+        '<div class="userPlaceholder">' + uDisplay + '</div>' +
+        '</div>'));
+    }
 
     if (userStream["audiostream"] && i !== MY_UUID) {
       if ($("#audioStreams").find('#audio' + i).length == 0) {
@@ -444,11 +448,11 @@ function updateUserLayout() {
   }
 
   $("#mediaDiv").empty();
-
-  if (streamCnt == 2) { //Display 2 users side by side
+  if (streamCnt > 1) { //Display users side by side
     for (var i in allUserDivs) {
       if (i == MY_UUID) {
-        allUserDivs[i].css({ width: '20%', height: '30%', position: 'absolute', left: '20px', bottom: '30px', 'z-index': '1' });
+        //allUserDivs[i].css({ width: '20%', height: '30%', position: 'absolute', left: '20px', bottom: '30px', 'z-index': '1' });
+        allUserDivs[i].css({ display: 'none' });
       } else {
         allUserDivs[i].css({ width: '100%', height: '100%', float: 'left' });
       }

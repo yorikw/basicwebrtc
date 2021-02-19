@@ -4,6 +4,9 @@ FROM node:14
 RUN mkdir -p /usr/src/webrtc
 WORKDIR /usr/src/webrtc
 
+# Extract container
+ADD ssl.tar.gz /usr/src/webrtc
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
