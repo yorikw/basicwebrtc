@@ -1,15 +1,19 @@
-FROM node:11
+FROM node:14
 
 # Create app directory
-RUN mkdir -p /opt/app
-WORKDIR /opt/app
+RUN mkdir -p /usr/src/webrtc
+WORKDIR /usr/src/webrtc
 
 # Install app dependencies
-COPY ./package.json /opt/app
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json /usr/src/webrtc
 RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
 # Bundle app source
-COPY . /opt/app
+COPY . /usr/src/webrtc
 
-EXPOSE 3001
-CMD [ "npm", "start" ]
+EXPOSE 4343
+CMD [ "node", "server.js" ]

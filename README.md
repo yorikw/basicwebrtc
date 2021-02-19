@@ -13,7 +13,7 @@ Setup your own WebRTC Server with 1on1 and group calls! All Calls are P2P encryp
 1. Install node and clone this repo
 2. run: npm i
 3. run: node server.js
-4. surf to: http://IP:3001
+4. surf to: https://IP:4343/
 
 ### All User parameters ###
 * `username` -> Change your username shown
@@ -22,11 +22,11 @@ Setup your own WebRTC Server with 1on1 and group calls! All Calls are P2P encryp
 * `socketdomain` -> Change if you want to use a different socketServer (Can also include path: `https://domainname.tld/path/sub/`)
 * `base64domain` -> true if socketDomain is given in base64 format
 
-Example: change the roomname: https://IP:3001/#roomname=yourSecretRoom
+Example: change the roomname: https://IP:4343/#roomname=yourSecretRoom
 
 ### Config Server Listen IP & Port
 
-Change the env variables: listen_ip ("0.0.0.0" default) and listen_port (3001 default)
+Change the env variables: listen_ip ("0.0.0.0" default) and listen_port (4343 default)
 
 ### Behind a nginx reverse Proxy
 ```
@@ -36,7 +36,7 @@ location /basicwebrtc/ {
 	proxy_http_version 1.1;
 	proxy_set_header Upgrade $http_upgrade;
 	proxy_set_header Connection upgrade;
-	proxy_pass http://127.0.0.1:8080/;
+	proxy_pass http://127.0.0.1:4343/;
 }
 ```
 ## STUN and TURN Configuration ##

@@ -5,8 +5,8 @@
 //------------------------------
 
 //Define https & websocket Port
-const HTTP_PORT = parseInt(process.env.listen_port) > 0 ? parseInt(process.env.listen_port) : 3001;
-const HTTP_IP = process.env.listen_ip ? process.env.listen_ip : "0.0.0.0";
+const PORT = parseInt(process.env.listen_port) > 0 ? parseInt(process.env.listen_port) : 4343;
+const IP = process.env.listen_ip ? process.env.listen_ip : "0.0.0.0";
 
 //Define API Version
 const API_VERSION = 1.1;
@@ -26,23 +26,30 @@ handler.use(express.static(__dirname + '/web', {
     }
 }));
 
-var app = require('http').createServer(handler)
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+};
 
-var ioServer = require('socket.io')(app, {cors: {
-    origin: function (origin, callback) {
-        callback(null, true) // allow all origins
-    },
-    credentials:false,
-    methods: ["GET", "POST"]
-  }});
+var app = require('https').createServer(options, handler);
+
+var ioServer = require('socket.io')(app, {
+    cors: {
+        origin: function (origin, callback) {
+            callback(null, true) // allow all origins
+        },
+        credentials: false,
+        methods: ["GET", "POST"]
+    }
+});
 var crypto = require('crypto');
 
-app.listen(HTTP_PORT, HTTP_IP);
+app.listen(PORT, IP);
 
 var icesevers = JSON.parse(fs.readFileSync("./iceservers.json", 'utf8'));
 
 console.log("--------------------------------------------");
-console.log("SIGNALINGSERVER RUNNING ON IP:PORT: " + HTTP_IP + ':' + HTTP_PORT);
+console.log("SIGNALINGSERVER RUNNING ON IP:PORT: " + IP + ':' + PORT);
 console.log("--------------------------------------------");
 
 var registerdUUIDs = {};

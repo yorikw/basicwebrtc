@@ -1,14 +1,16 @@
 {
   "name": "basicwebrtc",
-  "version": "1.0.0",
-  "description": "Simple 1on1 P2P Talking example!",
+  "version": "1.1.0",
+  "description": "Simple 1on1 P2P WebRTC!",
+  "author": "yorikw <help@yorikw.com>",
+  "license": "MIT",
   "main": "server.js",
   "scripts": {
     "test": "echo \"No tests needed!\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://git.cloud13.de/raphael/basicwebrtc"
+    "url": "https://github.com/yorikw/basicwebrtc"
   },
   "keywords": [
     "p2p",
@@ -17,7 +19,5 @@
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^3.0.4"
-  },
-  "author": "Cracker0dks",
-  "license": "MIT"
+  }
 }
