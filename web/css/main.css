@@ -61,7 +61,7 @@ video {
   width     : auto;
   height    : auto;
   padding   : 0;
-  margin    : auto auto 5px auto;
+  margin    : 0;
   top       : 30%;
   text-align: center;
   position  : relative;

@@ -389,7 +389,7 @@ function gotRemoteStream(stream, UUID) {
   }
 
   updateUserLayout();
-};
+}
 
 function updateUserLayout() {
   if (document.fullscreenElement) { //Dont do things on fullscreen
@@ -407,8 +407,17 @@ function updateUserLayout() {
     //only add chat data to the first stream
     if (streamCnt === 1) {
       userDiv.append($('<div class="userPlaceholderContainer">' +
-        '<div class="qrcodePlaceholder">' + $('<div/>').qrcode($(location).attr('href')).html() + '</div>' +
-        '<div class="userPlaceholder">' + uDisplay + '</div>' +
+        //'<div class="userPlaceholder">' + uDisplay + '</div>' +
+        '<div class="qrcodePlaceholder">' + $('<div/>').qrcode({
+          render: 'image',
+          mode: 2,
+          size: 180,
+          ecLevel: 'Q',
+          fill: 'black',
+          fontcolor: 'green',
+          text: $(location).attr('href'),
+          label: uDisplay
+        }).html() + '</div>' +
         '</div>'));
     }
 
